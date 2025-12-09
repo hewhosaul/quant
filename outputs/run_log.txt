@@ -1,0 +1,28 @@
+2025-12-09 14:50:55,690 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:50:55,690 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 14:50:55,690 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:53:13,868 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:53:13,869 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 14:53:13,869 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:54:38,332 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:54:38,333 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 14:54:38,333 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:55:52,351 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:55:52,351 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 14:55:52,352 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:55:52,352 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7eff8fe3f020>
+2025-12-09 14:55:52,352 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 14:55:52,352 - mega_india_quant - INFO - Running in FAST MODE - reduced data and iterations
+2025-12-09 14:56:23,864 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:56:23,864 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 14:56:23,864 - mega_india_quant - INFO - ================================================================================
+2025-12-09 14:56:23,865 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7f5c666adf40>
+2025-12-09 14:56:23,865 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 14:56:23,865 - mega_india_quant - INFO - Running unit tests...
+2025-12-09 14:56:23,865 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 14:56:23,865 - mega_india_quant - INFO - ✓ Data ingestion test passed
+2025-12-09 14:56:23,865 - mega_india_quant - ERROR - ✗ Feature engineering test failed: 'function' object has no attribute 'randn'
+2025-12-09 14:56:23,865 - mega_india_quant - ERROR - ✗ Model training test failed: 'function' object has no attribute 'randn'
+2025-12-09 14:56:23,866 - mega_india_quant - ERROR - ✗ Backtesting test failed: 'function' object has no attribute 'now'
+2025-12-09 14:56:23,866 - mega_india_quant - ERROR - ✗ Visualization test failed: 'SafeGridSpec' object is not callable
+2025-12-09 14:56:23,866 - mega_india_quant - WARNING - Some unit tests failed!
