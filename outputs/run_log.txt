@@ -187,3 +187,232 @@ advisors before making any investment decisions.
 2025-12-09 15:20:38,668 - mega_india_quant - ERROR - ✗ Backtesting test failed: 'SafeSeries' object has no attribute 'iloc'
 2025-12-09 15:20:38,668 - mega_india_quant - ERROR - ✗ Visualization test failed: 'function' object has no attribute 'normal'
 2025-12-09 15:20:38,668 - mega_india_quant - WARNING - Some unit tests failed!
+2025-12-09 15:32:19,621 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:19,622 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 15:32:19,622 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:19,622 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7fd05f91dfa0>
+2025-12-09 15:32:19,622 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 15:32:19,622 - mega_india_quant - INFO - Running in FAST MODE - reduced data and iterations
+2025-12-09 15:32:19,628 - mega_india_quant - INFO - Starting quantitative research pipeline...
+2025-12-09 15:32:19,628 - mega_india_quant - INFO - Step 1: Data Ingestion
+2025-12-09 15:32:19,628 - mega_india_quant - INFO - Ingesting market data...
+2025-12-09 15:32:19,628 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:32:19,628 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:32:19,630 - mega_india_quant - WARNING - Intraday data not available. Using simulated data.
+2025-12-09 15:32:19,631 - mega_india_quant - INFO - Loading CSV data from outputs/data
+2025-12-09 15:32:19,631 - mega_india_quant - WARNING - CSV folder outputs/data does not exist
+2025-12-09 15:32:19,631 - mega_india_quant - INFO - Data ingestion completed. Got 3 Indian and 14 global tickers
+2025-12-09 15:32:19,631 - mega_india_quant - INFO - Step 2: Feature Engineering
+2025-12-09 15:32:19,631 - mega_india_quant - INFO - Engineering features...
+2025-12-09 15:32:19,631 - mega_india_quant - ERROR - Error engineering features for RELIANCE.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:32:19,632 - mega_india_quant - ERROR - Error engineering features for TCS.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:32:19,632 - mega_india_quant - ERROR - Error engineering features for INFY.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:32:19,632 - mega_india_quant - INFO - Feature engineering completed for 0 tickers
+2025-12-09 15:32:19,632 - mega_india_quant - INFO - Step 3: Model Training and Selection
+2025-12-09 15:32:19,632 - mega_india_quant - INFO - Training models...
+2025-12-09 15:32:19,632 - mega_india_quant - INFO - Model training completed for 0 tickers
+2025-12-09 15:32:19,632 - mega_india_quant - INFO - Step 4: Strategy and Backtesting
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - Running backtests...
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - Backtesting completed for 1 strategies
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - Step 5: Generating Outputs
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - Generating output files...
+2025-12-09 15:32:19,633 - mega_india_quant - ERROR - Error generating outputs: 'dict' object has no attribute 'empty'
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - Pipeline completed in 0.01 seconds
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - FINAL EXECUTION SUMMARY
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:19,633 - mega_india_quant - INFO - 
+QUANTITATIVE RESEARCH PIPELINE COMPLETED
+
+Execution Summary:
+• Execution Time: 0.01 seconds
+• Data Sources: yfinance (primary), CSV (optional)
+• Tickers Analyzed: 0
+• Models Trained: 0 ticker-specific models
+• Backtesting Period: 2023-01-01 to 2024-01-01
+• Initial Capital: ₹1,000,000
+
+Performance Metrics (Best Strategy):
+• Win Rate: 0.0%
+• Sharpe Ratio: 0.00
+• Total Return: 0.0%
+• Max Drawdown: 0.0%
+• Volatility: 0.0%
+• Total Trades: 0
+
+Output Files:
+• Master Dashboard: outputs/master_dashboard.png
+• Trade Log: outputs/trade_log.csv
+• Equity Curve: outputs/equity_curve.csv
+• Features Data: outputs/features.csv
+• Predictions: outputs/predictions.csv
+• Run Log: outputs/run_log.txt
+
+System Configuration:
+• GPU Usage: Disabled
+• Parallel Processes: 2
+• Random Seed: 42
+
+IMPORTANT DISCLAIMER:
+This analysis is for educational and research purposes only.
+Past performance does not guarantee future results.
+All trading involves risk of loss. Please consult with financial
+advisors before making any investment decisions.
+        
+2025-12-09 15:32:41,656 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:41,656 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 15:32:41,656 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:32:41,657 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7efe772c9d60>
+2025-12-09 15:32:41,657 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 15:32:41,657 - mega_india_quant - INFO - Running unit tests...
+2025-12-09 15:32:41,657 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:32:41,657 - mega_india_quant - INFO - ✓ Data ingestion test passed
+2025-12-09 15:32:41,657 - mega_india_quant - ERROR - ✗ Feature engineering test failed: 'function' object has no attribute 'randn'
+2025-12-09 15:32:41,657 - mega_india_quant - ERROR - ✗ Model training test failed: 'function' object has no attribute 'randn'
+2025-12-09 15:32:41,657 - mega_india_quant - ERROR - ✗ Backtesting test failed: 'SafeSeries' object has no attribute 'iloc'
+2025-12-09 15:32:41,657 - mega_india_quant - ERROR - ✗ Visualization test failed: 'function' object has no attribute 'normal'
+2025-12-09 15:32:41,657 - mega_india_quant - WARNING - Some unit tests failed!
+2025-12-09 15:33:40,764 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:33:40,764 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 15:33:40,764 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:33:40,764 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7f7c4d086060>
+2025-12-09 15:33:40,765 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 15:33:40,765 - mega_india_quant - INFO - Running in FAST MODE - reduced data and iterations
+2025-12-09 15:33:40,768 - mega_india_quant - INFO - Starting quantitative research pipeline...
+2025-12-09 15:33:40,768 - mega_india_quant - INFO - Step 1: Data Ingestion
+2025-12-09 15:33:40,768 - mega_india_quant - INFO - Ingesting market data...
+2025-12-09 15:33:40,768 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:33:40,768 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:33:40,769 - mega_india_quant - WARNING - Intraday data not available. Using simulated data.
+2025-12-09 15:33:40,769 - mega_india_quant - INFO - Loading CSV data from outputs/data
+2025-12-09 15:33:40,770 - mega_india_quant - WARNING - CSV folder outputs/data does not exist
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Data ingestion completed. Got 3 Indian and 14 global tickers
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Step 2: Feature Engineering
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Engineering features...
+2025-12-09 15:33:40,770 - mega_india_quant - ERROR - Error engineering features for RELIANCE.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:33:40,770 - mega_india_quant - ERROR - Error engineering features for TCS.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:33:40,770 - mega_india_quant - ERROR - Error engineering features for INFY.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Feature engineering completed for 0 tickers
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Step 3: Model Training and Selection
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Training models...
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Model training completed for 0 tickers
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Step 4: Strategy and Backtesting
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Running backtests...
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Backtesting completed for 1 strategies
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Step 5: Generating Outputs
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Generating output files...
+2025-12-09 15:33:40,770 - mega_india_quant - ERROR - Error generating outputs: 'dict' object has no attribute 'empty'
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - Pipeline completed in 0.00 seconds
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - FINAL EXECUTION SUMMARY
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:33:40,770 - mega_india_quant - INFO - 
+QUANTITATIVE RESEARCH PIPELINE COMPLETED
+
+Execution Summary:
+• Execution Time: 0.00 seconds
+• Data Sources: yfinance (primary), CSV (optional)
+• Tickers Analyzed: 0
+• Models Trained: 0 ticker-specific models
+• Backtesting Period: 2023-01-01 to 2024-01-01
+• Initial Capital: ₹1,000,000
+
+Performance Metrics (Best Strategy):
+• Win Rate: 0.0%
+• Sharpe Ratio: 0.00
+• Total Return: 0.0%
+• Max Drawdown: 0.0%
+• Volatility: 0.0%
+• Total Trades: 0
+
+Output Files:
+• Master Dashboard: outputs/master_dashboard.png
+• Trade Log: outputs/trade_log.csv
+• Equity Curve: outputs/equity_curve.csv
+• Features Data: outputs/features.csv
+• Predictions: outputs/predictions.csv
+• Run Log: outputs/run_log.txt
+
+System Configuration:
+• GPU Usage: Disabled
+• Parallel Processes: 2
+• Random Seed: 42
+
+IMPORTANT DISCLAIMER:
+This analysis is for educational and research purposes only.
+Past performance does not guarantee future results.
+All trading involves risk of loss. Please consult with financial
+advisors before making any investment decisions.
+        
+2025-12-09 15:34:20,665 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:34:20,665 - mega_india_quant - INFO - MEGA INDIA QUANTITATIVE RESEARCH ENGINE INITIALIZING
+2025-12-09 15:34:20,665 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:34:20,666 - mega_india_quant - INFO - Using device: <__main__.SafeTorch.Device object at 0x7f38c90dbc20>
+2025-12-09 15:34:20,666 - mega_india_quant - INFO - Engine initialization completed successfully
+2025-12-09 15:34:20,666 - mega_india_quant - INFO - Running in FAST MODE - reduced data and iterations
+2025-12-09 15:34:20,669 - mega_india_quant - INFO - Starting quantitative research pipeline...
+2025-12-09 15:34:20,669 - mega_india_quant - INFO - Step 1: Data Ingestion
+2025-12-09 15:34:20,669 - mega_india_quant - INFO - Ingesting market data...
+2025-12-09 15:34:20,669 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:34:20,669 - mega_india_quant - WARNING - yfinance not available. Using simulated data.
+2025-12-09 15:34:20,671 - mega_india_quant - WARNING - Intraday data not available. Using simulated data.
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Loading CSV data from outputs/data
+2025-12-09 15:34:20,671 - mega_india_quant - WARNING - CSV folder outputs/data does not exist
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Data ingestion completed. Got 3 Indian and 14 global tickers
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Step 2: Feature Engineering
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Engineering features...
+2025-12-09 15:34:20,671 - mega_india_quant - ERROR - Error engineering features for RELIANCE.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:34:20,671 - mega_india_quant - ERROR - Error engineering features for TCS.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:34:20,671 - mega_india_quant - ERROR - Error engineering features for INFY.NS: object of type 'SafeDataFrame' has no len()
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Feature engineering completed for 0 tickers
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Step 3: Model Training and Selection
+2025-12-09 15:34:20,671 - mega_india_quant - INFO - Training models...
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Model training completed for 0 tickers
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Step 4: Strategy and Backtesting
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Running backtests...
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Backtesting completed for 1 strategies
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Step 5: Generating Outputs
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Generating output files...
+2025-12-09 15:34:20,672 - mega_india_quant - ERROR - Error generating outputs: 'dict' object has no attribute 'empty'
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - Pipeline completed in 0.00 seconds
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - FINAL EXECUTION SUMMARY
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - ================================================================================
+2025-12-09 15:34:20,672 - mega_india_quant - INFO - 
+QUANTITATIVE RESEARCH PIPELINE COMPLETED
+
+Execution Summary:
+• Execution Time: 0.00 seconds
+• Data Sources: yfinance (primary), CSV (optional)
+• Tickers Analyzed: 0
+• Models Trained: 0 ticker-specific models
+• Backtesting Period: 2023-01-01 to 2024-01-01
+• Initial Capital: ₹1,000,000
+
+Performance Metrics (Best Strategy):
+• Win Rate: 0.0%
+• Sharpe Ratio: 0.00
+• Total Return: 0.0%
+• Max Drawdown: 0.0%
+• Volatility: 0.0%
+• Total Trades: 0
+
+Output Files:
+• Master Dashboard: outputs/master_dashboard.png
+• Trade Log: outputs/trade_log.csv
+• Equity Curve: outputs/equity_curve.csv
+• Features Data: outputs/features.csv
+• Predictions: outputs/predictions.csv
+• Run Log: outputs/run_log.txt
+
+System Configuration:
+• GPU Usage: Disabled
+• Parallel Processes: 2
+• Random Seed: 42
+
+IMPORTANT DISCLAIMER:
+This analysis is for educational and research purposes only.
+Past performance does not guarantee future results.
+All trading involves risk of loss. Please consult with financial
+advisors before making any investment decisions.
+        

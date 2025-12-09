@@ -1144,7 +1144,7 @@ class DataIngestion:
         
         # For intraday data, we need to use current dates since Yahoo Finance
         # only provides 5m data for the last 60 days
-        now = original_datetime.now()
+        now = datetime.now()
         end_dt = now - timedelta(days=1)  # Yesterday to avoid partial days
         start_dt = end_dt - timedelta(days=60)  # Last 60 days max for 5m data
         
@@ -2652,7 +2652,7 @@ class MegaIndiaQuantEngine:
         self.config.indian_tickers = original_tickers[:self.config.fast_mode_sample_tickers]
         
         # Update dates for fast mode
-        end_date = original_datetime.strptime(self.config.end_date, "%Y-%m-%d")
+        end_date = datetime.strptime(self.config.end_date, "%Y-%m-%d")
         start_date = end_date - timedelta(days=365)  # 1 year of data
         
         self.config.start_date = start_date.strftime('%Y-%m-%d')
