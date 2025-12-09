@@ -74,6 +74,16 @@ except ImportError:
             return SafeRandom()
         
         @staticmethod
+        def randn(*args):
+            """Generate random normal values."""
+            if not args:
+                return random.normalvariate(0, 1)
+            elif len(args) == 1:
+                return [random.normalvariate(0, 1) for _ in range(args[0])]
+            else:
+                return [[random.normalvariate(0, 1) for _ in range(args[1])] for _ in range(args[0])]
+        
+        @staticmethod
         def std(data, axis=None):
             if isinstance(data, (list, tuple)):
                 if len(data) == 0:
@@ -90,6 +100,21 @@ except ImportError:
         @staticmethod
         def sqrt(data):
             return data ** 0.5 if data >= 0 else 0
+        
+        @staticmethod
+        def isnan(x):
+            """Check if value is NaN."""
+            return isinstance(x, float) and (x != x)  # NaN != NaN is True
+        
+        @staticmethod
+        def cumsum(arr):
+            """Cumulative sum."""
+            result = []
+            running_sum = 0
+            for x in arr:
+                running_sum += x
+                result.append(running_sum)
+            return result
         
         @staticmethod
         def array(data):
@@ -465,6 +490,8 @@ except ImportError:
         class Axes:
             def __init__(self):
                 self.data = []
+                self.transAxes = self  # Simple identity transform for axes coordinates
+                
             def plot(self, *args, **kwargs):
                 self.data.append(('plot', args, kwargs))
                 return self
@@ -519,10 +546,27 @@ except ImportError:
         def suptitle(title, **kwargs):
             pass
     
+    class SafeGridSpec:
+        def __init__(self, nrows, ncols, figure=None, **kwargs):
+            self.nrows = nrows
+            self.ncols = ncols
+            self.figure = figure
+            self._subscript_result = SafeGridSpecSubscript()
+        
+        def __getitem__(self, key):
+            return self._subscript_result
+        
+        def __call__(self, *args, **kwargs):
+            return self
+    
+    class SafeGridSpecSubscript:
+        def __getitem__(self, key):
+            return SafeMatplotlib.Axes()
+    
     plt = SafeMatplotlib()
     mdates = type('SafeMDates', (), {})()
     sns = type('SafeSeaborn', (), {'set_palette': lambda *args, **kwargs: None})()
-    GridSpec = type('SafeGridSpec', (), {})()
+    GridSpec = SafeGridSpec
 
 # Additional imports
 try:
@@ -601,6 +645,14 @@ if not PANDAS_AVAILABLE or pd is None:
         def fillna(self, value=0):
             return SafeSeries([x if x is not None else value for x in self.data], self.index)
         
+        def dropna(self, how='any'):
+            """Drop NA values."""
+            if how == 'any':
+                cleaned_data = [x for x in self.data if x is not None and not (isinstance(x, float) and np.isnan(x))]
+            else:
+                cleaned_data = self.data[:]  # For 'all' case, keep all for now
+            return SafeSeries(cleaned_data, self.index[:len(cleaned_data)])
+        
         def shift(self, periods=1):
             result = [None] * min(periods, len(self.data))
             result.extend(self.data[:-periods] if periods < len(self.data) else [])
@@ -659,13 +711,49 @@ if not PANDAS_AVAILABLE or pd is None:
             return (len(self.index), len(self.columns))
     
     # Override pandas references
+    # Also need to override datetime for the pandas Timestamp
+    original_datetime = datetime
+    
+    class SafeDatetime:
+        @staticmethod
+        def now():
+            return original_datetime.now()
+        
+        @staticmethod
+        def to_datetime(x, *args, **kwargs):
+            """Convert various formats to datetime."""
+            if isinstance(x, str):
+                # Try common formats
+                for fmt in ["%Y-%m-%d", "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S"]:
+                    try:
+                        return original_datetime.strptime(x, fmt)
+                    except ValueError:
+                        continue
+                # If no format works, return as is
+                return x
+            elif hasattr(x, 'to_pydatetime'):
+                return x.to_pydatetime()
+            else:
+                return x
+    
+    class SafeTimestamp:
+        def __init__(self, *args, **kwargs):
+            self.value = args[0] if args else original_datetime.now()
+        
+        @classmethod
+        def now(cls):
+            return cls(original_datetime.now())
+        
+        def __str__(self):
+            return str(self.value)
+    
     pd = type('MockPandas', (), {
         'DataFrame': SafeDataFrame,
         'Series': SafeSeries,
         'concat': lambda *args, **kwargs: SafeDataFrame(),
         'date_range': lambda *args, **kwargs: list(range(100)),
-        'to_datetime': lambda x: x,
-        'Timestamp': lambda x: x  # Simple timestamp replacement
+        'to_datetime': SafeDatetime.to_datetime,
+        'Timestamp': SafeTimestamp
     })()
     
     PANDAS_AVAILABLE = True  # We have our fallback now
@@ -1054,19 +1142,42 @@ class DataIngestion:
         
         self.logger.info("Fetching intraday data")
         
+        # For intraday data, we need to use current dates since Yahoo Finance
+        # only provides 5m data for the last 60 days
+        now = original_datetime.now()
+        end_dt = now - timedelta(days=1)  # Yesterday to avoid partial days
+        start_dt = end_dt - timedelta(days=60)  # Last 60 days max for 5m data
+        
+        # Check if the requested historical date range is within available range
+        hist_start = SafeDatetime.to_datetime(start_date)
+        hist_end = SafeDatetime.to_datetime(end_date)
+        
+        # Convert to comparable format for comparison
+        if hasattr(hist_end, 'value'):
+            hist_end = hist_end.value
+        if hasattr(hist_start, 'value'):
+            hist_start = hist_start.value
+        
+        if hist_end < start_dt:
+            self.logger.warning(f"Requested intraday data range ({start_date} to {end_date}) is outside Yahoo Finance's 60-day limit. Using simulated data.")
+            return create_sample_data(tickers, start_date, end_date)
+        
+        # Use the more restrictive of historical range and available range
+        actual_start = max(hist_start, start_dt)
+        actual_end = min(hist_end, end_dt)
+        
+        self.logger.info(f"Attempting to fetch intraday data from {actual_start.strftime('%Y-%m-%d')} to {actual_end.strftime('%Y-%m-%d')}")
+        
         intraday_data = {}
         for ticker in tickers:
             try:
-                # Get intraday data (last 7 days to avoid limits)
-                end_dt = pd.to_datetime(end_date)
-                start_dt = end_dt - timedelta(days=7)
-                
                 ticker_obj = yf.Ticker(ticker)
                 intraday = ticker_obj.history(
-                    start=start_dt,
-                    end=end_dt,
+                    start=actual_start,
+                    end=actual_end,
                     interval="5m",
-                    auto_adjust=True
+                    auto_adjust=True,
+                    progress=False
                 )
                 
                 if not intraday.empty:
@@ -1081,16 +1192,22 @@ class DataIngestion:
                     
                     intraday_data[ticker] = daily_ohlc
                     self.logger.debug(f"Resampled intraday data for {ticker}: {len(daily_ohlc)} days")
+                else:
+                    self.logger.warning(f"No intraday data available for {ticker} in range {actual_start.strftime('%Y-%m-%d')} to {actual_end.strftime('%Y-%m-%d')}")
                 
             except Exception as e:
                 self.logger.error(f"Error fetching intraday data for {ticker}: {e}")
+                # Check if it's a date range error
+                if "no price data found" in str(e).lower() or "60 days" in str(e).lower():
+                    self.logger.warning(f"Intraday data not available for historical period. Using simulated data for {ticker}")
                 continue
         
         # If no intraday data was fetched, use sample data
         if not intraday_data:
-            self.logger.warning("No intraday data fetched. Using simulated data.")
+            self.logger.warning("No intraday data fetched for any ticker. Using simulated data.")
             return create_sample_data(tickers, start_date, end_date)
         
+        self.logger.info(f"Successfully fetched intraday data for {len(intraday_data)}/{len(tickers)} tickers")
         return intraday_data
     
     def load_csv_data(self, folder_path: str, file_pattern: str = "*.csv") -> Dict[str, Any]:
@@ -2535,7 +2652,7 @@ class MegaIndiaQuantEngine:
         self.config.indian_tickers = original_tickers[:self.config.fast_mode_sample_tickers]
         
         # Update dates for fast mode
-        end_date = pd.to_datetime(self.config.end_date)
+        end_date = original_datetime.strptime(self.config.end_date, "%Y-%m-%d")
         start_date = end_date - timedelta(days=365)  # 1 year of data
         
         self.config.start_date = start_date.strftime('%Y-%m-%d')
